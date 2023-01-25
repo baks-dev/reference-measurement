@@ -33,7 +33,7 @@ return static function (ContainerConfigurator $configurator)
       ->autoconfigure()
     ;
 	
-    $services->set('money.type.twig.extension')
+    $services->set('measurement.type.twig.extension')
       ->class(MeasurementExtension::class)
       ->tag('twig.extension');
 	
