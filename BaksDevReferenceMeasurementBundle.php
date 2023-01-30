@@ -21,66 +21,34 @@
  *  THE SOFTWARE.
  */
 
-namespace BaksDev\Reference\Measurement\Type;
+declare(strict_types=1);
 
-/** Единицы измерения */
-final class Measurement
+namespace BaksDev\Reference\Measurement;
+
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
+class BaksDevReferenceMeasurementBundle extends AbstractBundle
 {
 	
-	public const TYPE = 'measurement_type';
-	
-	private MeasurementEnum $measurement;
-	
-	
-	public function __construct(string|MeasurementEnum $measurement)
+	public function prependExtension(ContainerConfigurator $container, ContainerBuilder $builder) : void
 	{
 		
-		if($measurement instanceof MeasurementEnum)
+		$path = __DIR__.'/Resources/config/';
+		
+		foreach(new \DirectoryIterator($path) as $config)
 		{
-			$this->measurement = $measurement;
+			if($config->isDot() || $config->isDir())
+			{
+				continue;
+			}
+			
+			if($config->isFile() && $config->getFilename() !== 'routes.php')
+			{
+				$container->import($config->getPathname());
+			}
 		}
-		else
-		{
-			$this->measurement = MeasurementEnum::from($measurement);
-		}
-		
-	}
-	
-	
-	public function __toString() : string
-	{
-		return $this->measurement->value;
-	}
-	
-	
-	public function getValue() : string
-	{
-		return $this->measurement->value;
-	}
-	
-	
-	public function getMeasurement() : MeasurementEnum
-	{
-		return $this->measurement;
-	}
-	
-	
-	public function getName() : string
-	{
-		return $this->measurement->name;
-	}
-	
-	
-	public static function cases() : array
-	{
-		$case = null;
-		
-		foreach(MeasurementEnum::cases() as $local)
-		{
-			$case[] = new self($local);
-		}
-		
-		return $case;
 	}
 	
 }

@@ -27,7 +27,6 @@ use BaksDev\Reference\Measurement\Type\Measurement;
 use BaksDev\Reference\Measurement\Type\MeasurementType;
 use Symfony\Config\DoctrineConfig;
 
-return static function (DoctrineConfig $doctrine)
-{
+return static function(DoctrineConfig $doctrine) {
 	$doctrine->dbal()->type(Measurement::TYPE)->class(MeasurementType::class);
 };

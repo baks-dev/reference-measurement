@@ -23,12 +23,12 @@
 
 namespace BaksDev\Reference\Measurement\Type;
 
-enum MeasurementEnum: string
+enum MeasurementEnum : string
 {
-    case STUNT = 'stunt'; // Штука
-    case LITER = 'liter'; // Литр
-    case GRAM = 'gram'; // Грамм
-    case KILOGRAM = 'kilogram'; // Килограмм
-    case METER = 'meter'; // Метр
-    
+	case STUNT = 'stunt'; // Штука
+	case LITER = 'liter'; // Литр
+	case GRAM = 'gram'; // Грамм
+	case KILOGRAM = 'kilogram'; // Килограмм
+	case METER = 'meter'; // Метр
+	
 }

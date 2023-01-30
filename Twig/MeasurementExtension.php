@@ -29,16 +29,19 @@ use Twig\TwigFunction;
 
 final class MeasurementExtension extends AbstractExtension
 {
-
-    public function getFunctions(): array
-    {
-        return [
-          new TwigFunction('measurement', [$this, 'measurement'], ['needs_environment' => true, 'is_safe' => ['html']]),
-        ];
-    }
-    
-    public function measurement(Environment $twig, string $measurement): string
-    {
-        return $measurement;  // $twig->render('@ModifyAction/modify.html.twig', ['action' => 'modify.'.$action]);
-    }
+	
+	public function getFunctions() : array
+	{
+		return [
+			new TwigFunction('measurement', [$this, 'measurement'], ['needs_environment' => true, 'is_safe' => ['html']]
+			),
+		];
+	}
+	
+	
+	public function measurement(Environment $twig, string $measurement) : string
+	{
+		return $measurement;  // $twig->render('@ModifyAction/modify.html.twig', ['action' => 'modify.'.$action]);
+	}
+	
 }

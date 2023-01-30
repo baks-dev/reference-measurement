@@ -28,31 +28,36 @@ use Doctrine\DBAL\Types\StringType;
 
 final class MeasurementType extends StringType
 {
-    
-    public function convertToDatabaseValue($value, AbstractPlatform $platform) : mixed
-    {
-        return $value instanceof Measurement ? $value->getValue() :  (new Measurement($value))->getValue();
-    }
-    
-    public function convertToPHPValue($value, AbstractPlatform $platform) : mixed
-    {
-        return $value ? new Measurement($value) : null;
-    }
-    
-    public function getName() : string
-    {
-        return Measurement::TYPE;
-    }
-    
-    public function requiresSQLCommentHint(AbstractPlatform $platform) : bool
-    {
-        return true;
-    }
-    
-    public function getSQLDeclaration(array $column, AbstractPlatform $platform) : string
-    {
-        $column['length'] = 10;
-        return $platform->getStringTypeDeclarationSQL($column);
-    }
-    
+	
+	public function convertToDatabaseValue($value, AbstractPlatform $platform) : mixed
+	{
+		return $value instanceof Measurement ? $value->getValue() : (new Measurement($value))->getValue();
+	}
+	
+	
+	public function convertToPHPValue($value, AbstractPlatform $platform) : mixed
+	{
+		return $value ? new Measurement($value) : null;
+	}
+	
+	
+	public function getName() : string
+	{
+		return Measurement::TYPE;
+	}
+	
+	
+	public function requiresSQLCommentHint(AbstractPlatform $platform) : bool
+	{
+		return true;
+	}
+	
+	
+	public function getSQLDeclaration(array $column, AbstractPlatform $platform) : string
+	{
+		$column['length'] = 10;
+		
+		return $platform->getStringTypeDeclarationSQL($column);
+	}
+	
 }

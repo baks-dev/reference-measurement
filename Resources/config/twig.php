@@ -25,17 +25,17 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use BaksDev\Reference\Measurement\Twig\MeasurementExtension;
 
-return static function (ContainerConfigurator $configurator)
-{
-    $services = $configurator->services()
-      ->defaults()
-      ->autowire()
-      ->autoconfigure()
-    ;
+return static function(ContainerConfigurator $configurator) {
+	$services = $configurator->services()
+		->defaults()
+		->autowire()
+		->autoconfigure()
+	;
 	
-    $services->set('measurement.type.twig.extension')
-      ->class(MeasurementExtension::class)
-      ->tag('twig.extension');
+	$services->set('measurement.type.twig.extension')
+		->class(MeasurementExtension::class)
+		->tag('twig.extension')
+	;
 	
 };
 
