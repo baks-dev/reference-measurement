@@ -30,11 +30,6 @@
       "BaksDev\\Reference\\Measurement\\": ""
     }
   },
-  "autoload-dev": {
-    "psr-4": {
-      "BaksDev\\Reference\\Measurement\\Tests\\": "Tests/"
-    }
-  },
   "config": {
     "sort-packages": true,
     "allow-plugins": {
