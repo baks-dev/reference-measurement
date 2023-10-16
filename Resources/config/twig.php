@@ -36,7 +36,6 @@ return static function(ContainerConfigurator $configurator) {
 		->class(MeasurementExtension::class)
 		->tag('twig.extension')
 	;
-	
 };
 
 

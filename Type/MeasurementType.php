@@ -29,19 +29,19 @@ use Doctrine\DBAL\Types\StringType;
 final class MeasurementType extends StringType
 {
 	
-	public function convertToDatabaseValue($value, AbstractPlatform $platform) : mixed
+	public function convertToDatabaseValue($value, AbstractPlatform $platform): mixed
 	{
 		return $value instanceof Measurement ? $value->getValue() : (new Measurement($value))->getValue();
 	}
 	
 	
-	public function convertToPHPValue($value, AbstractPlatform $platform) : mixed
+	public function convertToPHPValue($value, AbstractPlatform $platform): mixed
 	{
 		return $value ? new Measurement($value) : null;
 	}
 	
 	
-	public function getName() : string
+	public function getName(): string
 	{
 		return Measurement::TYPE;
 	}
@@ -53,7 +53,7 @@ final class MeasurementType extends StringType
 	}
 	
 	
-	public function getSQLDeclaration(array $column, AbstractPlatform $platform) : string
+	public function getSQLDeclaration(array $column, AbstractPlatform $platform): string
 	{
 		$column['length'] = 10;
 		

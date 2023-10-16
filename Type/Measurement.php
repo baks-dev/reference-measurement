@@ -47,13 +47,13 @@ final class Measurement
 	}
 	
 	
-	public function __toString() : string
+	public function __toString(): string
 	{
 		return $this->measurement->value;
 	}
 	
 	
-	public function getValue() : string
+	public function getValue(): string
 	{
 		return $this->measurement->value;
 	}
@@ -65,7 +65,7 @@ final class Measurement
 	}
 	
 	
-	public function getName() : string
+	public function getName(): string
 	{
 		return $this->measurement->name;
 	}

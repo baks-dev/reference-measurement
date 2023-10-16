@@ -39,7 +39,7 @@ final class MeasurementExtension extends AbstractExtension
 	}
 	
 	
-	public function measurement(Environment $twig, string $measurement) : string
+	public function measurement(Environment $twig, string $measurement): string
 	{
 		return $measurement;  // $twig->render('@ModifyAction/modify.html.twig', ['action' => 'modify.'.$action]);
 	}
