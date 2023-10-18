@@ -1,7 +1,7 @@
 {
   "namespaces": [
     {
-      "namespace": "Measurement",
+      "namespace": "reference-measurement",
       "path": "Resources/view"
     }
   ]

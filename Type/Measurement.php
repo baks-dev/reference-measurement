@@ -23,64 +23,112 @@
 
 namespace BaksDev\Reference\Measurement\Type;
 
+use BaksDev\Reference\Measurement\Type\Measurements\Collection\MeasurementInterface;
+use BaksDev\Reference\Measurement\Type\Measurements\MeasurementStunt;
+use InvalidArgumentException;
+
 /** Единицы измерения */
 final class Measurement
 {
-	
 	public const TYPE = 'measurement_type';
 	
-	private MeasurementEnum $measurement;
+	private MeasurementInterface $measurement;
 	
 	
-	public function __construct(string|MeasurementEnum $measurement)
+	public function __construct(MeasurementInterface|self|string|null $measurement)
 	{
-		
-		if($measurement instanceof MeasurementEnum)
-		{
-			$this->measurement = $measurement;
-		}
-		else
-		{
-			$this->measurement = MeasurementEnum::from($measurement);
-		}
+        if($measurement === null)
+        {
+            $measurement = MeasurementStunt::class;
+        }
+
+        if(is_string($measurement) && class_exists($measurement))
+        {
+            $instance = new $measurement();
+
+            if($instance instanceof MeasurementInterface)
+            {
+                $this->measurement = $instance;
+                return;
+            }
+        }
+
+        if($measurement instanceof MeasurementInterface)
+        {
+            $this->measurement = $measurement;
+            return;
+        }
+
+        if($measurement instanceof self)
+        {
+            $this->measurement = $measurement->getMeasurement();
+            return;
+        }
+
+        /** @var MeasurementInterface $declare */
+        foreach(self::getDeclared() as $declare)
+        {
+            if($declare::equals($measurement))
+            {
+                $this->measurement = new $declare;
+                return;
+            }
+        }
+
+        throw new InvalidArgumentException(sprintf('Not found Measurement %s', $measurement));
 		
 	}
 	
 	
 	public function __toString(): string
 	{
-		return $this->measurement->value;
+		return $this->measurement->getValue();
 	}
 	
 	
-	public function getValue(): string
+	public function getMeasurementValue(): string
 	{
-		return $this->measurement->value;
+		return $this->measurement->getValue();
 	}
 	
 	
-	public function getMeasurement() : MeasurementEnum
+	public function getMeasurement() : MeasurementInterface
 	{
 		return $this->measurement;
 	}
-	
-	
-	public function getName(): string
-	{
-		return $this->measurement->name;
-	}
-	
-	
-	public static function cases() : array
-	{
-		$case = null;
-		
-		foreach(MeasurementEnum::cases() as $local)
-		{
-			$case[] = new self($local);
-		}
-		
-		return $case;
-	}
+
+
+
+    public static function cases(): array
+    {
+        $case = [];
+
+        foreach(self::getDeclared() as $measurement)
+        {
+            /** @var MeasurementInterface $measurement */
+            $class = new $measurement;
+            $case[$class::sort()] = new self($measurement);
+        }
+
+        return $case;
+    }
+
+    public static function getDeclared(): array
+    {
+        return array_filter(
+            get_declared_classes(),
+            static function($className) {
+                return in_array(MeasurementInterface::class, class_implements($className), true);
+            }
+        );
+    }
+
+
+    public function equals(mixed $status): bool
+    {
+        $status = new self($status);
+
+        return $this->getMeasurementValue() === $status->getMeasurementValue();
+    }
 	
 }
