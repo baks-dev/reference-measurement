@@ -37,7 +37,7 @@ final class MeasurementType extends StringType
 
     public function convertToPHPValue($value, AbstractPlatform $platform): mixed
     {
-        return new Measurement($value);
+        return !empty($value) ? new Measurement($value) : null;
     }
 
 
