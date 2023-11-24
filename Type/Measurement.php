@@ -31,7 +31,9 @@ use InvalidArgumentException;
 final class Measurement
 {
 	public const TYPE = 'measurement_type';
-	
+
+	public const TEST = MeasurementStunt::class;
+
 	private MeasurementInterface $measurement;
 	
 	
