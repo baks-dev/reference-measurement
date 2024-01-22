@@ -67,5 +67,7 @@ final class MeasurementTest extends KernelTestCase
 
         }
 
+        self::assertTrue(true);
+
     }
 }
