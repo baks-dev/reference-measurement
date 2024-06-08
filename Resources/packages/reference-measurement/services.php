@@ -1,6 +1,6 @@
 <?php
 /*
- *  Copyright 2023.  Baks.dev <admin@baks.dev>
+ *  Copyright 2024.  Baks.dev <admin@baks.dev>
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -23,11 +23,25 @@
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use Symfony\Config\FrameworkConfig;
+use BaksDev\Reference\Measurement\BaksDevReferenceMeasurementBundle;
 
-return static function(FrameworkConfig $config) {
-	$config->translator()->paths([__DIR__.'/../translations/']);
+return static function(ContainerConfigurator $configurator) {
+
+    $services = $configurator->services()
+        ->defaults()
+        ->autowire()
+        ->autoconfigure();
+
+    $NAMESPACE = BaksDevReferenceMeasurementBundle::NAMESPACE;
+    $PATH = BaksDevReferenceMeasurementBundle::PATH;
+
+    $services->load($NAMESPACE, $PATH)
+        ->exclude([
+            $PATH.'{Entity,Resources,Type}',
+            $PATH.'**/*Message.php',
+            $PATH.'**/*DTO.php',
+        ])
+    ;
+
+    $services->load($NAMESPACE.'Type\Measurements\\', $PATH.'Type/Measurements');
 };
-
-
-
