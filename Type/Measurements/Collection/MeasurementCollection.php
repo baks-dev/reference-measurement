@@ -25,14 +25,14 @@ declare(strict_types=1);
 
 namespace BaksDev\Reference\Measurement\Type\Measurements\Collection;
 
-use Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
+use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 
 final class MeasurementCollection
 {
     private iterable $status;
 
     public function __construct(
-        #[TaggedIterator('baks.measurement', defaultPriorityMethod: 'sort')] iterable $status,
+        #[AutowireIterator('baks.measurement', defaultPriorityMethod: 'sort')] iterable $status,
     )
     {
         $this->status = $status;
