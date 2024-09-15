@@ -26,11 +26,8 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 use BaksDev\Reference\Measurement\BaksDevReferenceMeasurementBundle;
 use Symfony\Config\FrameworkConfig;
 
-return static function(FrameworkConfig $config) {
+return static function (FrameworkConfig $config) {
     $config
         ->translator()
-        ->paths([BaksDevReferenceMeasurementBundle::PATH.'Resources/translations/']);
+        ->paths([BaksDevReferenceMeasurementBundle::PATH.implode(DIRECTORY_SEPARATOR, ['Resources', 'translations', ''])]); // .'Resources/translations/']);
 };
-
-
-
