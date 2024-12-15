@@ -1,6 +1,6 @@
 <?php
 /*
- *  Copyright 2023.  Baks.dev <admin@baks.dev>
+ *  Copyright 2024.  Baks.dev <admin@baks.dev>
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -30,9 +30,9 @@ use InvalidArgumentException;
 /** Единицы измерения */
 final class Measurement
 {
-	public const TYPE = 'measurement_type';
+    public const string TYPE = 'measurement_type';
 
-	public const TEST = MeasurementStunt::class;
+    public const string TEST = MeasurementStunt::class;
 
 	private MeasurementInterface $measurement;
 	
