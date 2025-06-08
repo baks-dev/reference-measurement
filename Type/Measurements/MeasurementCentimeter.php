@@ -29,11 +29,11 @@ use BaksDev\Reference\Measurement\Type\Measurements\Collection\MeasurementInterf
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 
 #[AutoconfigureTag('baks.measurement')]
-final class MeasurementStunt implements MeasurementInterface
+final class MeasurementCentimeter implements MeasurementInterface
 {
-    // Штука
+    // Сантиметр
 
-    public const string STATUS = 'stunt';
+    public const string STATUS = 'centimeter';
 
     public function getValue(): string
     {
@@ -45,7 +45,7 @@ final class MeasurementStunt implements MeasurementInterface
      */
     public static function sort(): int
     {
-        return 1;
+        return 2;
     }
 
     public static function equals(string $status): bool
