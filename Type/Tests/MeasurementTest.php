@@ -30,13 +30,12 @@ use BaksDev\Reference\Measurement\Type\Measurements\Collection\MeasurementCollec
 use BaksDev\Reference\Measurement\Type\MeasurementType;
 use BaksDev\Wildberries\Orders\Type\WildberriesStatus\Status\Collection\WildberriesStatusInterface;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
+use PHPUnit\Framework\Attributes\Group;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\DependencyInjection\Attribute\When;
 
-/**
- * @group reference-measurement
- */
 #[When(env: 'test')]
+#[Group('reference-measurement')]
 final class MeasurementTest extends KernelTestCase
 {
     public function testUseCase(): void
